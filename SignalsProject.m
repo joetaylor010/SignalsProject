@@ -43,8 +43,6 @@ device2(13,:) = load('Device-2\CURRENT-9.0V.dat')';
 device2(14,:) = load('Device-2\CURRENT-10.0V.dat')';
 
 % Calculate average current for both devices
-% Graph current vs frequency using fft
-% SpectrumAnalyzer has been modified to display +/-500 points from 0 Hz.
 for i=1:1:14
     avgcurrent1(i) = mean(device1(i,:));
     avgcurrent2(i) = mean(device2(i,:));
