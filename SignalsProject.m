@@ -9,6 +9,8 @@
 avgcurrent1 = zeros(14,1);
 avgcurrent2 = zeros(14,1);
 voltage = [0 0.1 0.5 1 1.5 2 3 4 5 6 7 8 9 10];
+maxfreq1 = zeros(14,1);
+maxfreq2 = zeros(14,1);
 
 % Load device 1 data
 if exist('device1','var') == 0
@@ -46,24 +48,12 @@ if exist('device2','var') == 0
     device2(13,:) = load('Device-2\CURRENT-9.0V.dat')';
     device2(14,:) = load('Device-2\CURRENT-10.0V.dat')';
 end
-n = 130001;
-fshift = -65000:1:65000;
-
-fourier1 = fft(device1,[],2);
-fourier2 = fft(device2,[],2);
-fouriershift1 = fftshift(fourier1);
-fouriershift2 = fftshift(fourier2);
 
 % Calculate average current and fft for both devices
 for i=1:1:14
     avgcurrent1(i) = mean(device1(i,:));
     avgcurrent2(i) = mean(device2(i,:));
 end
-
-fshifttranspose1 = fouriershift1.';
-fshifttranspose2 = fouriershift2.';
-[maxamp1,maxindex1] = max(fshifttranspose1);
-[maxamp2,maxindex2] = max(fshifttranspose2);
 
 % Graph average current versus voltage for both devices
 figure
@@ -73,22 +63,26 @@ xlabel('Voltage (V)')
 ylabel('Average Current (A)')
 legend('Device 1', 'Device 2','Location','north')
 
-%Graph FFT of Device 1
+%Graph fourier transform of Device 1
 figure
 for i=1:1:14
     subplot(5,3,i)
-    plot(fshift(64000:10:66000),abs(fouriershift1(i,64000:10:66000)))
+    maxfreq1(i) = SpectrumAnalyzer(device1(i,:),1E15);
     title(['Current vs. Frequency for Device 1 at ',num2str(voltage(i)),' Volts'])
-    xlabel('Frequency (Hz)')
-    ylabel('Current (A)')
 end
 
-%Graph FFT of Device 2
+%Graph fourier transform of Device 2
 figure
 for i=1:1:14
     subplot(5,3,i)
-    plot(fshift(64000:10:66000),abs(fouriershift2(i,64000:10:66000)))
+    maxfreq2(i) = SpectrumAnalyzer(device2(i,:),1E15);
     title(['Current vs. Frequency for Device 2 at ',num2str(voltage(i)),' Volts'])
-    xlabel('Frequency (Hz)')
-    ylabel('Current (A)')
 end
+
+% Graph frequency versus voltage for both devices
+figure
+plot(voltage, maxfreq1, 'k-*', voltage, maxfreq2, 'b-*');
+title('Frequency of Maximum vs. Voltage for Devices 1 and 2')
+xlabel('Voltage (V)')
+ylabel('Frequency (Hz)')
+legend('Device 1', 'Device 2','Location','north')
