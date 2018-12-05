@@ -59,10 +59,10 @@ figure
 plot(voltage, avgcurrent1, 'k-*', voltage, avgcurrent2, 'b-*');
 title('Average Current vs. Voltage (I-V Curve) for Devices 1 and 2')
 xlabel('Voltage (V)')
-ylabel('Average Current (A)')
+ylabel('Average Current (A/m)')
 legend('Device 1', 'Device 2','Location','north')
 
-%Graph fourier transform of Device 1
+% Graph fourier transform of Device 1
 figure
 for i=1:1:14
     subplot(5,3,i)
@@ -70,7 +70,7 @@ for i=1:1:14
     title(['Current vs. Frequency for Device 1 at ',num2str(voltage(i)),' Volts'])
 end
 
-%Graph fourier transform of Device 2
+% Graph fourier transform of Device 2
 figure
 for i=1:1:14
     subplot(5,3,i)
@@ -80,7 +80,7 @@ end
 
 % Graph frequency versus voltage for both devices
 figure
-plot(voltage, maxfreq1, 'k-*', voltage, maxfreq2, 'b-*');
+plot(voltage, maxfreq1, 'k-', voltage, maxfreq2, 'b-');
 title('Frequency of Maximum vs. Voltage for Devices 1 and 2')
 xlabel('Voltage (V)')
 ylabel('Frequency (Hz)')
