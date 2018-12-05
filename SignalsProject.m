@@ -15,27 +15,23 @@ maxfreq2 = zeros(14,1);
 % Load device 1 data
 if exist('device1','var') == 0
     device1 = zeros(14,130001);
-    figure
     for i=1:1:14
         device1(i,:) = load(['Device-1/CURRENT-',num2str(voltage(i),'%.1f'),'V.dat']);
-        avgcurrent1(i) = mean(device1(i,:));
-        subplot(5,3,i)
-        maxfreq1(i) = SpectrumAnalyzer(device1(i,:),1E15);
-        title(['Current vs. Frequency for Device 1 at ',num2str(voltage(i)),' Volts'])
     end
 end
 
 % Load device 2 data
 if exist('device2','var') == 0
     device2 = zeros(14,130001);
-    figure
     for i=1:1:14
         device2(i,:) = load(['Device-2/CURRENT-',num2str(voltage(i),'%.1f'),'V.dat']);
-        avgcurrent2(i) = mean(device2(i,:));
-        subplot(5,3,i)
-        maxfreq2(i) = SpectrumAnalyzer(device2(i,:),1E15);
-        title(['Current vs. Frequency for Device 2 at ',num2str(voltage(i)),' Volts'])
     end
+end
+
+% Calculate average current for both devices
+for i=1:1:14
+    avgcurrent1(i) = mean(device1(i,:));
+    avgcurrent2(i) = mean(device2(i,:));
 end
 
 % Graph average current versus voltage for both devices
@@ -45,6 +41,22 @@ title('Average Current vs. Voltage (I-V Curve) for Devices 1 and 2')
 xlabel('Voltage (V)')
 ylabel('Average Current (A/m)')
 legend('Device 1', 'Device 2','Location','north')
+
+% Graph current versus frequency for Device 1
+figure
+for i=1:1:14
+    subplot(5,3,i)
+    maxfreq1(i) = SpectrumAnalyzer(device1(i,:),1E15);
+    title(['Current vs. Frequency for Device 1 at ',num2str(voltage(i)),' Volts'])
+end
+
+% Graph current versus frequency for Device 2
+figure
+for i=1:1:14
+    subplot(5,3,i)
+    maxfreq2(i) = SpectrumAnalyzer(device2(i,:),1E15);
+    title(['Current vs. Frequency for Device 2 at ',num2str(voltage(i)),' Volts'])
+end
 
 % Graph frequency versus voltage for both devices
 figure
