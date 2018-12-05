@@ -28,7 +28,7 @@ if exist('device2','var') == 0
     end
 end
 
-% Graph current versus frequency for Device 1
+% Graph current versus frequency for device 1
 figure
 for i=1:1:14
     avgcurrent1(i) = mean(device1(i,:));
@@ -37,7 +37,7 @@ for i=1:1:14
     title(['Current vs. Frequency for Device 1 at ',num2str(voltage(i)),' Volts'])
 end
 
-% Graph current versus frequency for Device 2
+% Graph current versus frequency for device 2
 figure
 for i=1:1:14
     avgcurrent2(i) = mean(device2(i,:));
