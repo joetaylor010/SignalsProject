@@ -30,7 +30,6 @@ if exist('device1','var') == 0
     device1(14,:) = load('Device-1\CURRENT-10.0V.dat')';
 end
 
-
 % Load device 2 data
 if exist('device2','var') == 0
     device2(1,:) = load('Device-2\CURRENT-0.0V.dat')';
