@@ -3,7 +3,7 @@ Yaxis = abs(fftshift(fft(InputArray)));
 Yaxis = Yaxis.*Yaxis;
 
 v = size(Yaxis);
-if v(1)== 1
+if v(1) == 1
  V = size(Yaxis,2);
  Xaxis = -Fs/2+Fs/V:Fs/V:(Fs/2);
 else
