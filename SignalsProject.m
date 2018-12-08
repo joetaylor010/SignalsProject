@@ -28,6 +28,26 @@ if exist('device2','var') == 0
     end
 end
 
+% Graph current versus time for device 1
+figure
+for i=1:1:14
+    subplot(5,3,i)
+    plot(1:1:130001,device1(i,:))
+    xlabel('Time (femtoseconds)')
+    ylabel('Current (A/m)')
+    title(['Current vs. Time for Device 1 at ',num2str(voltage(i)),' Volts'])
+end
+
+% Graph current versus time for device 2
+figure
+for i=1:1:14
+    subplot(5,3,i)
+    plot(1:1:130001,device2(i,:))
+    xlabel('Time (femtoseconds)')
+    ylabel('Current (A/m)')
+    title(['Current vs. Time for Device 2 at ',num2str(voltage(i)),' Volts'])
+end
+
 % Graph current versus frequency for device 1
 figure
 for i=1:1:14
