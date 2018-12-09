@@ -1,21 +1,23 @@
-function maxfreq = SpectrumAnalyzer(InputArray,Fs)
-Yaxis = abs(fftshift(fft(InputArray)));
-Yaxis = Yaxis.*Yaxis;
+function maxfreq = SpectrumAnalyzer(signal,fs)
+% Calculate FFT
+% I don't have a terrific understanding of how this works
+N = length(signal);
+X_mags = abs(fft(signal));
+bin_vals = 0 : N-1;
+fax_Hz = bin_vals * fs / N;
+N_2 = ceil(N/2);
+xaxis = fax_Hz(2:N_2);
+yaxis = 20*log10(X_mags(2:N_2));
 
-v = size(Yaxis);
-if v(1) == 1
- V = size(Yaxis,2);
- Xaxis = -Fs/2+Fs/V:Fs/V:(Fs/2);
-else
-  V = v(1);
-  Xaxis = -Fs/2+Fs/V:Fs/V:(Fs/2);
-  Xaxis = Xaxis.';
-end
-Xaxis = Xaxis + Fs/2;
-Yaxis = 10*log10(Yaxis*4/(V.*V));
-plot(Xaxis,Yaxis)
+% Plot FFT
+semilogx(xaxis, yaxis)
 xlabel('Frequency (Hz)')
-ylabel('Power (dB)')
+ylabel('Power (dB)');
+title({'Single-sided Power spectrum' ...
+    ' (Frequency in shown on a log scale)'});
+axis tight
 
-[~,maxindex] = max(Yaxis);
-maxfreq = Xaxis(maxindex);
+% Determine and return frequency at maximum value
+[~,maxindex] = max(yaxis);
+maxfreq = xaxis(maxindex);
+end
