@@ -29,7 +29,8 @@ if exist('device2','var') == 0
 end
 
 % Graph current versus time for device 1
-figure
+fig = figure;
+fig.WindowState = 'maximized';
 for i=1:1:14
     subplot(5,3,i)
     plot(1:1:130001,device1(i,:))
@@ -39,7 +40,8 @@ for i=1:1:14
 end
 
 % Graph current versus time for device 2
-figure
+fig = figure;
+fig.WindowState = 'maximized';
 for i=1:1:14
     subplot(5,3,i)
     plot(1:1:130001,device2(i,:))
@@ -49,7 +51,8 @@ for i=1:1:14
 end
 
 % Graph current versus frequency for device 1
-figure
+fig = figure;
+fig.WindowState = 'maximized';
 for i=1:1:14
     avgcurrent1(i) = mean(device1(i,:));
     subplot(5,3,i)
@@ -58,7 +61,8 @@ for i=1:1:14
 end
 
 % Graph current versus frequency for device 2
-figure
+fig = figure;
+fig.WindowState = 'maximized';
 for i=1:1:14
     avgcurrent2(i) = mean(device2(i,:));
     subplot(5,3,i)
@@ -67,7 +71,8 @@ for i=1:1:14
 end
 
 % Graph average current versus voltage for both devices
-figure
+fig = figure;
+fig.WindowState = 'maximized';
 plot(voltage, avgcurrent1, 'k-*', voltage, avgcurrent2, 'b-*');
 title('Average Current vs. Voltage (I-V Curve) for Devices 1 and 2')
 xlabel('Voltage (V)')
@@ -75,7 +80,8 @@ ylabel('Average Current (A/m)')
 legend('Device 1', 'Device 2','Location','north')
 
 % Graph frequency at max versus voltage for both devices
-figure
+fig = figure;
+fig.WindowState = 'maximized';
 plot(voltage, maxfreq1, 'k-', voltage, maxfreq2, 'b-');
 title('Frequency of Maximum vs. Voltage for Devices 1 and 2')
 xlabel('Voltage (V)')
