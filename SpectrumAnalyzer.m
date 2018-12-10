@@ -1,6 +1,5 @@
 function maxfreq = SpectrumAnalyzer(signal,fs)
 % Calculate FFT
-% I don't have a terrific understanding of how this works
 N = length(signal);
 X_mags = abs(fft(signal));
 bin_vals = 0 : N-1;
